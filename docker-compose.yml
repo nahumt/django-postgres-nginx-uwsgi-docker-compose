@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  app:
+    image: nahumt/respirar:latest
+    env_file:
+      - ./respirar.base.env
+    depends_on:
+      - database
+      - cache
+  database:
+    image: postgres:12.0-alpine
+  cache:
+    image: redis:latest
+volumes:
+  postgres_data:
