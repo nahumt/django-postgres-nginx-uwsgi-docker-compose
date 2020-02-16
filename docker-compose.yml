@@ -3,7 +3,7 @@ services:
   app:
     image: nahumt/respirar:latest
     env_file:
-      - ./respirar.base.env
+      - ./env/respirar.base.env
     depends_on:
       - database
       - cache

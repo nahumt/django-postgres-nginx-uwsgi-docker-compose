@@ -13,8 +13,7 @@ services:
     environment: 
       - DJANGO_SETTINGS_MODULE=respirar.settings
     env_file:
-      - ./respirar.base.env
-      - ./respirar.dev.env
+      - ./env/respirar.dev.env
     ports:
       - 8000:8000
     volumes:
