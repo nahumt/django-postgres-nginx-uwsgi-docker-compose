@@ -13,16 +13,14 @@ services:
     environment: 
       - DJANGO_SETTINGS_MODULE=respirar.settings
     env_file:
-      - ./env/respirar.dev.env
+      - ./env/app/app.dev.env
     ports:
       - 8000:8000
     volumes:
       - .:/projects/respirar/
   database:
-    environment:
-      - POSTGRES_USER=respirar
-      - POSTGRES_PASSWORD=respirar123
-      - POSTGRES_DB=respirar_db
+    env_file:
+      - ./env/db/db.dev.env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
   cache:

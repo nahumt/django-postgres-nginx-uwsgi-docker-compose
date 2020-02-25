@@ -3,12 +3,14 @@ services:
   app:
     image: nahumt/respirar:latest
     env_file:
-      - ./env/respirar.base.env
+      - ./env/app/app.base.env
     depends_on:
       - database
       - cache
   database:
     image: postgres:12.0-alpine
+    env_file:
+      - ./env/db/db.base.env
   cache:
     image: redis:latest
 volumes:
