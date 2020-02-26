@@ -25,3 +25,6 @@ RUN pip3 install -r requirements/base.txt
 
 #copy project
 COPY . ${workdir}
+
+# run entrypoint.sh
+ENTRYPOINT ["./dev/entrypoint.sh"]

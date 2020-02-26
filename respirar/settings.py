@@ -88,8 +88,6 @@ DATABASES = {
     'default': DATABASE_DEFAULT
 }
 
-print('DATABASE_URL test', DATABASES)
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
