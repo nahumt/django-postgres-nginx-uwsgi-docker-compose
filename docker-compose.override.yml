@@ -1,26 +1,23 @@
 version: '3.7'
 services:
   app:
+    image: nahumt/respirar:dev
     build:
       context: .
-      args:
-        workdir: /projects/respirar/
-      target: build
+      target: dev
     command: python manage.py runserver 0:8000
     depends_on:
-      - database
+      - db
       - cache
-    environment: 
-      - DJANGO_SETTINGS_MODULE=respirar.settings
     env_file:
-      - ./env/app/app.dev.env
+      - ./env/app/.dev.env
     ports:
       - 8000:8000
     volumes:
       - .:/projects/respirar/
-  database:
+  db:
     env_file:
-      - ./env/db/db.dev.env
+      - ./env/db/.dev.env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
   cache:

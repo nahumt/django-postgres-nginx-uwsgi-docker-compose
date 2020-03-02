@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+  app:
+    image: nahumt/respirar:latest
+    build:
+      context: .
+      target: prod
+    command: gunicorn respirar.wsgi:application --bind 0.0.0.0:8000
+    depends_on:
+      - db
+      - cache
+    env_file:
+      - ./env/app/.prod.env
+    ports:
+      - 8000
+    volumes:
+      - static_volume:/home/app/respirar/staticfiles
+      - media_volume:/home/app/respirar/mediafiles
+  db:
+    env_file:
+      - ./env/db/.prod.env
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data/
+  cache:
+    ports:
+      - 6379:6379
+  nginx:
+    build: ./nginx
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - static_volume:/home/app/respirar/staticfiles
+      - media_volume:/home/app/respirar/mediafiles
+    ports:
+      - 1337:80
+    depends_on:
+      - app
+volumes:
+  postgres_data_prod:
+  static_volume:
+  media_volume:
