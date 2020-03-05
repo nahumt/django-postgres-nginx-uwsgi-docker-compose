@@ -76,6 +76,7 @@ USER app
 
 # run entrypoint.prod.sh
 ENTRYPOINT ["/home/app/respirar/entrypoint.prod.sh"]
+CMD [ "python", "./manage.py", "runserver", "0.0.0.0:8000" ]
 
 ####### end image prod ######
 
