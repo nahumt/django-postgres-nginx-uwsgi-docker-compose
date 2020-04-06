@@ -7,11 +7,25 @@ services:
     depends_on:
       - db
       - cache
+    networks:
+      - backend
+      - frontend
   db:
     image: postgres:12.0-alpine
     env_file:
       - ./env/db/.base.env
+    networks:
+      backend:
+        aliases:
+          - database
   cache:
     image: redis:latest
 volumes:
   postgres_data:
+networks:
+  frontend:
+    name: respirar_frontend
+    driver: bridge
+  backend:
+    name: respirar_backend
+    driver: bridge

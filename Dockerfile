@@ -34,6 +34,7 @@ COPY ./entrypoint.dev.sh .
 
 # run entrypoint.sh
 ENTRYPOINT ["./entrypoint.dev.sh"]
+CMD [ "python", "./manage.py", "runserver", "0.0.0.0:8000" ]
 ###### end builder ######
 
 ####### begin image prod ######

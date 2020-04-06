@@ -15,13 +15,27 @@ services:
       - 8000:8000
     volumes:
       - .:/projects/respirar/
+    networks:
+      - backend
+      - frontend
   db:
     env_file:
       - ./env/db/.dev.env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    networks:
+      backend:
+        aliases:
+          - database
   cache:
     ports:
       - 6379:6379
 volumes:
   postgres_data:
+networks:
+  frontend:
+    name: respirar_frontend
+    driver: bridge
+  backend:
+    name: respirar_backend
+    driver: bridge
