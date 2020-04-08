@@ -1,6 +1,7 @@
 # Django base app with docker
 
-Django base app build with python 3.8, uWSGI, nginx, postgres, docker and docker-compose 
+Django base app build with python 3.8, uWSGI, nginx, postgres, docker and docker-compose.
+
 In this project I use [multi stages](https://docs.docker.com/develop/develop-images/multistage-build/) to optimize Dockerfile and I use [multiple Compose files](https://docs.docker.com/compose/extends/#multiple-compose-files)
 
 ## Requirements 
