@@ -40,7 +40,7 @@ services:
     depends_on:
       - app
     ports:
-      - 1337:80
+      - 8081:80
     networks:
       backend:
         aliases:
