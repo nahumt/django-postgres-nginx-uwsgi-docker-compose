@@ -1,5 +1,4 @@
 env/
-respirar/**/*.pyc
 *.pyc
-db.sqlite3
 *.log
+db.sqlite3
