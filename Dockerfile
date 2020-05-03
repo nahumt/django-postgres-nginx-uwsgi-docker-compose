@@ -59,7 +59,7 @@ WORKDIR $APP_HOME
 # install dependencies
 RUN apt-get update && apt-get install libpq-dev -yq
 COPY --from=dev /usr/src/app/wheels /wheels
-COPY --from=dev /usr/src/app/requirements/ .
+COPY --from=dev /usr/src/app/requirements/ ./requirements
 RUN pip3 install --upgrade pip
 RUN pip3 install --no-cache /wheels/*
 
