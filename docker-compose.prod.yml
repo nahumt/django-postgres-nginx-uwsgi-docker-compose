@@ -5,7 +5,7 @@ services:
     build:
       context: .
       target: prod
-    command: gunicorn respirar.wsgi:application --bind 0.0.0.0:8000
+    command: uwsgi --ini uwsgi/respirar_uwsgi_prod.ini
     depends_on:
       - db
       - cache
@@ -32,9 +32,7 @@ services:
     ports:
       - 6379:6379
     networks:
-      backend:
-        aliases:
-          - cache
+      - backend
   nginx:
     build: ./nginx
     depends_on:

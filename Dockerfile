@@ -77,7 +77,7 @@ USER app
 
 # run entrypoint.prod.sh
 ENTRYPOINT ["/home/app/respirar/entrypoint.prod.sh"]
-CMD [ "gunicorn", "respirar.wsgi:application", "--bind", "0.0.0.0:8000" ]
+CMD [ "uwsgi", "--ini", "uwsgi/respirar_uwsgi_prod.ini" ]
 
 ####### end image prod ######
 

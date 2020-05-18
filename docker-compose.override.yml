@@ -14,7 +14,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - .:/projects/respirar/
+      - .:/usr/src/respirar/
     networks:
       - backend
       - frontend
