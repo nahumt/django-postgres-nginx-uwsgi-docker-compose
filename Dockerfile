@@ -21,32 +21,30 @@ RUN apt-get update && apt-get -yq install \
   python3-dev \
   musl-dev \
   python3-pip
-
 #install dependencies
 RUN pip3 install --upgrade pip
 RUN pip3 install flake8
 COPY ./requirements/base.txt ./requirements/base.txt
+COPY ./uwsgi/uwsgi_app_dev.ini ./uwsgi/
 RUN flake8 --ignore=E501,F401 .
 COPY . /usr/src/app/
 RUN pip3 install -r ./requirements/base.txt
 RUN pip3 wheel --progress-bar emoji --no-cache-dir --no-deps --wheel-dir ./wheels -r requirements/base.txt
 COPY ./entrypoint.dev.sh .
-
 # run entrypoint.sh
 ENTRYPOINT ["./entrypoint.dev.sh"]
 CMD [ "python", "./manage.py", "runserver", "0.0.0.0:8000" ]
-###### end builder ######
+# CMD [ "uwsgi", "--ini", "uwsgi/uwsgi_app_dev.ini" ]
+###### end dev  ######
+
 
 ####### begin image prod ######
 # pull official base image
 FROM base as prod
-
 # create directory for the app user
 RUN mkdir -p /home/app
-
 # create the app user
 RUN addgroup --system app && adduser --system app --ingroup app
-
 # create the appropriate directories
 ENV HOME=/home/app
 ENV APP_HOME=$HOME/respirar
@@ -54,12 +52,11 @@ RUN mkdir $APP_HOME
 RUN mkdir $APP_HOME/staticfiles
 RUN mkdir $APP_HOME/mediafiles
 WORKDIR $APP_HOME
-
-
 # install dependencies
 RUN apt-get update && apt-get install libpq-dev -yq
 COPY --from=dev /usr/src/app/wheels /wheels
 COPY --from=dev /usr/src/app/requirements/ ./requirements
+COPY ./uwsgi/uwsgi_app_prod.ini ./uwsgi/
 RUN pip3 install --upgrade pip
 RUN pip3 install --no-cache /wheels/*
 
@@ -77,8 +74,11 @@ USER app
 
 # run entrypoint.prod.sh
 ENTRYPOINT ["/home/app/respirar/entrypoint.prod.sh"]
-CMD [ "gunicorn", "respirar.wsgi:application", "--bind", "0.0.0.0:8000" ]
+CMD [ "uwsgi", "--ini", "uwsgi/uwsgi_app_prod.ini" ]
 
 ####### end image prod ######
 
-# nginx has one master process and several worker processes. The main purpose of the master process is to read and evaluate configuration, and maintain worker processes. Worker processes do actual processing of requests
+# nginx has one master process and several worker processes.
+# The main purpose of the master process is to read and evaluate configuration,
+# and maintain worker processes.
+# Worker processes do actual processing of requests

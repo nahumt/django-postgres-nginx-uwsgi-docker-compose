@@ -5,7 +5,7 @@ services:
     build:
       context: .
       target: prod
-    command: gunicorn respirar.wsgi:application --bind 0.0.0.0:8000
+    command: uwsgi --ini uwsgi/uwsgi_app_prod.ini
     depends_on:
       - db
       - cache
