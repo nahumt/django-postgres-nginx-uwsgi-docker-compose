@@ -75,7 +75,6 @@ USER app
 # run entrypoint.prod.sh
 ENTRYPOINT ["/home/app/respirar/entrypoint.prod.sh"]
 CMD [ "uwsgi", "--ini", "uwsgi/uwsgi_app_prod.ini" ]
-
 ####### end image prod ######
 
 # nginx has one master process and several worker processes.
