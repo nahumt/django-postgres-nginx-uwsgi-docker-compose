@@ -36,3 +36,25 @@ Start docker-compose
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 ```
 
+## Add environment variable
+
+```
+# app
+DEBUG=False
+SECRET_KEY=SECRET_KEY_PROD
+DATABASE_URL=postgres://production:production123@db:5432/database_prod
+DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+DJANGO_SETTINGS_MODULE=respirar.settings
+STATIC_URL=/static/
+MEDIA_URL=/media/
+
+```
+
+```
+#db
+POSTGRES_USER=production
+POSTGRES_PASSWORD=production123
+POSTGRES_DB=database_prod
+POSTGRES_PORT=5432
+
+```
