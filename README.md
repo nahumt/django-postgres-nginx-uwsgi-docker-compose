@@ -44,7 +44,7 @@ DEBUG=False
 SECRET_KEY=SECRET_KEY_PROD
 DATABASE_URL=postgres://production:production123@db:5432/database_prod
 DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
-DJANGO_SETTINGS_MODULE=respirar.settings
+DJANGO_SETTINGS_MODULE=[project-name].settings
 STATIC_URL=/static/
 MEDIA_URL=/media/
 
