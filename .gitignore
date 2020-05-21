@@ -4,3 +4,6 @@ db.sqlite3
 staticfiles/
 mediafiles/
 wheels/
+envs/
+dev/
+dev1/
