@@ -5,4 +5,5 @@ staticfiles/
 mediafiles/
 wheels/
 envs/
+env/
 dev/
